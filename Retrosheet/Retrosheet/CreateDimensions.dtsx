@@ -1,0 +1,3061 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/8/2014 2:38:26 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="THOR"
+  DTS:CreatorName="THOR\rditt_000"
+  DTS:DTSID="{CA4095CB-907A-40F5-8DBD-BAB3F69FAF51}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2344.23"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CreateDimensions"
+  DTS:PackageType="5"
+  DTS:VersionBuild="26"
+  DTS:VersionGUID="{C7828579-D8A6-4229-920F-666FF3877B8F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Event Types]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{F1CFCDE7-A6DE-4E08-BE1D-73B4B88DF76B}"
+      DTS:ObjectName="Event Types">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="H:\Retrosheet\data\EventTypes.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Code"
+              DTS:DTSID="{0A4FF354-BFA6-480A-90A4-B2293C93C33F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary event"
+              DTS:DTSID="{05B8E38D-521F-42EA-BCE9-D894BBBC4E8F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Players]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{9C4D5E5F-5EC3-43A8-B41F-E42058D534AA}"
+      DTS:ObjectName="Players">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="H:\Retrosheet\Names.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="17"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST"
+              DTS:DTSID="{BA68A466-D2C6-4D8F-8287-C8D92691C5D8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FIRST"
+              DTS:DTSID="{92F914ED-0CAE-4699-BD52-F000BCBFD854}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ID"
+              DTS:DTSID="{0D2EE44F-5645-46CC-97E7-BF2C264B9B1F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="133"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DEBUT"
+              DTS:DTSID="{A85737DF-4539-46DD-B743-7C3F68C1F53F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TSQL Retrosheet]"
+      DTS:CreationName="ADO.NET:SQL"
+      DTS:DTSID="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+      DTS:ObjectName="TSQL Retrosheet">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=thor\groot;Integrated Security=SSPI;Connect Timeout=30;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Tables"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{079DBF66-19E0-4BD9-8B70-FB11230E701E}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Tables">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimBalls"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{c9bd00de-644a-4844-93e9-630f94637b3a}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBalls"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimBalls', 'U') is not null&#xA; drop table retrosheet.dbo.dimBalls;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimBalls&#xA;(&#xA;Balls Int Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimBases"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{3361f85d-29c8-4a04-b0fd-9bc5efbc581e}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBases"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimBases', 'U') is not null&#xA; drop table retrosheet.dbo.dimBases;&#xA;&#xA;&#xA;CREATE TABLE retrosheet.dbo.dimBases&#xA;(&#xA; BasesID int Primary Key,&#xA; BasesCD char(3),&#xA; Description varchar(20)&#xA;)"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimBattedBallType"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{e2f25d90-01b8-40bb-ae44-83935e802b74}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBattedBallType"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimBattedBallType', 'U') is not null&#xA; drop table retrosheet.dbo.dimBattedBallType;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimBattedBallType&#xA;(&#xA;BattedBallType char(1) Primary Key,&#xA;Description varchar(15)&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimBatterLineup"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{c4746ff3-b0cb-4aa6-9001-e5bd83d830b5}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBatterLineup"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimBatterLineup', 'U') is not null&#xA; drop table retrosheet.dbo.dimBatterLineup;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimBatterLineup&#xA;(&#xA;BatterLineup int Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimBatterPosition"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{b4577d2d-406c-4a3f-8ba5-93089c3b9520}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBatterPosition"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimBatterPosition', 'U') is not null&#xA; drop table retrosheet.dbo.dimBatterPosition;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimBatterPosition&#xA;(&#xA;BatterPosition int Primary Key,&#xA;Description varchar(15)&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimBunt"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{ccca7cbd-95f6-4b4f-b174-02e5fee6d6fc}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBunt"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimBunt', 'U') is not null&#xA; drop table retrosheet.dbo.dimBunt;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimBunt&#xA;(&#xA;Bunt char(1) Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimEventType"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{1dffd400-f785-4f06-87f0-5dc9ea3107d3}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimEventType"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimEventType', 'U') is not null&#xA; drop table retrosheet.dbo.dimEventType;&#xA;&#xA;&#xA;CREATE TABLE retrosheet.dbo.dimEventType&#xA;(&#xA; EventCD int Primary Key,&#xA; EventName varchar(30) NULL&#xA;)"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimFoul"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{38c5d254-7a6d-4fb6-9cbd-8e0b3320bc0c}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimFoul"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimFoul', 'U') is not null&#xA; drop table retrosheet.dbo.dimFoul;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimFoul&#xA;(&#xA;Foul char(1) Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimGame"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{6329a47e-beae-4559-a5f4-84f4894a1202}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimGame"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimGame', 'U') is not null&#xA; drop table retrosheet.dbo.dimGame;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimGame&#xA;(&#xA;GameID char(12) Primary Key,&#xA;Year int,&#xA;Month int,&#xA;Day int,&#xA;GameNumber int&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimHitterHand"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{2084bfa0-5117-40a4-b2c9-621e8d59f1b1}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimHitterHand"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimBatterHand', 'U') is not null&#xA; drop table retrosheet.dbo.dimBatterHand;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimBatterHand&#xA;(&#xA;BatterHand char(1) Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimHome"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{84e9ffcd-feed-4015-be1a-5a53a242eb0a}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimHome"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimHome', 'U') is not null&#xA; drop table retrosheet.dbo.dimHome;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimHome&#xA;(&#xA;Home char(1) Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimInning"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{0b6b45d2-8201-4065-b01a-f76ee0da91a7}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimInning"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimInning', 'U') is not null&#xA; drop table retrosheet.dbo.dimInning;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimInning&#xA;(&#xA;Inning int Primary Key&#xA;);&#xA;"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimLeadoff"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{992f8e8c-3fda-4fdc-80e0-d39900791517}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimLeadoff"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimLeadoff', 'U') is not null&#xA; drop table retrosheet.dbo.dimLeadoff;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimLeadoff&#xA;(&#xA;Leadoff char(1) Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimOuts"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{73b44724-c4e4-4bb0-b4d2-13d4071ded77}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimOuts"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimOuts', 'U') is not null&#xA; drop table retrosheet.dbo.dimOuts;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimOuts&#xA;(&#xA;Outs int Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimPinchHit"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{609afa06-a94d-4474-bf35-328b30a88e23}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimPinchHit"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimPinchHit', 'U') is not null&#xA; drop table retrosheet.dbo.dimPinchHit;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimPinchHit&#xA;(&#xA;PinchHit char(1) Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimPitcherHand"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{d3e557bb-7e95-4568-b4f2-a24158913e1c}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimPitcherHand"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimPitcherHand', 'U') is not null&#xA; drop table retrosheet.dbo.dimPitcherHand;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimPitcherHand&#xA;(&#xA;PitcherHand char(1) Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimPlayer"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{24a9f577-d3b6-4001-bb81-fe902786ee40}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimPlayer"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimPlayer', 'U') is not null&#xA; drop table retrosheet.dbo.dimPlayer;&#xA;&#xA;&#xA;CREATE TABLE retrosheet.dbo.dimPlayer (&#xA;    PlayerID varchar(10) Primary Key ,&#xA;    First varchar(15),&#xA;    Last varchar(17),&#xA;    Debut date&#xA;)"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimStrikes"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{9423c3ee-f9ad-4a01-a923-46e2f32067f4}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimStrikes"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimStrikes', 'U') is not null&#xA; drop table retrosheet.dbo.dimStrikes;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimStrikes&#xA;(&#xA;Strikes Int Primary Key&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\dimTeam"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{bedca05c-aaf1-40c0-963d-1a4172995de6}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimTeam"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use Retrosheet;&#xA;&#xA;set ansi_nulls on;&#xA;set quoted_identifier on;&#xA;set ansi_padding on;&#xA;&#xA;if object_id('dimTeam', 'U') is not null&#xA; drop table retrosheet.dbo.dimTeam;&#xA;&#xA;&#xA;create table retrosheet.dbo.dimTeam&#xA;(&#xA;Team char(3) Primary Key,&#xA;Franchise varchar(50)&#xA;);"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{21206456-faf1-47de-ae05-22ded1e46a0b}"
+          DTS:From="Package\Create Tables\dimStrikes"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Create Tables\dimHitterHand" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{9ba89467-6060-4400-88af-3c6cf7f3b7fe}"
+          DTS:From="Package\Create Tables\dimOuts"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Create Tables\dimBalls" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 10]"
+          DTS:CreationName=""
+          DTS:DTSID="{F3976B93-88DE-4728-8C9F-8F8108B52B04}"
+          DTS:From="Package\Create Tables\dimEventType"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 10"
+          DTS:To="Package\Create Tables\dimBases" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 11]"
+          DTS:CreationName=""
+          DTS:DTSID="{6858FB4A-65AE-4F17-BC38-E9130A9F1657}"
+          DTS:From="Package\Create Tables\dimPlayer"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 11"
+          DTS:To="Package\Create Tables\dimTeam" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 12]"
+          DTS:CreationName=""
+          DTS:DTSID="{244960dc-1927-4ec8-8771-0c9ccdf22c1b}"
+          DTS:From="Package\Create Tables\dimBases"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 12"
+          DTS:To="Package\Create Tables\dimBattedBallType" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 13]"
+          DTS:CreationName=""
+          DTS:DTSID="{f464315f-a70a-4a86-94a7-7e5878299d90}"
+          DTS:From="Package\Create Tables\dimBattedBallType"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 13"
+          DTS:To="Package\Create Tables\dimBunt" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 14]"
+          DTS:CreationName=""
+          DTS:DTSID="{677a8309-f8e9-4d8f-8880-63738a41893e}"
+          DTS:From="Package\Create Tables\dimBunt"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 14"
+          DTS:To="Package\Create Tables\dimFoul" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 15]"
+          DTS:CreationName=""
+          DTS:DTSID="{eabc6acc-81a5-4db6-8c27-88c7de3404c4}"
+          DTS:From="Package\Create Tables\dimFoul"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 15"
+          DTS:To="Package\Create Tables\dimPlayer" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 16]"
+          DTS:CreationName=""
+          DTS:DTSID="{2DDFBEE5-8F90-4D9C-A5A7-E65329B12E46}"
+          DTS:From="Package\Create Tables\dimGame"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 16"
+          DTS:To="Package\Create Tables\dimHome" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 18]"
+          DTS:CreationName=""
+          DTS:DTSID="{33f33639-ab2e-418e-86aa-34f089db70d0}"
+          DTS:From="Package\Create Tables\dimTeam"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 18"
+          DTS:To="Package\Create Tables\dimGame" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{C34ABAAB-8835-496F-B2D3-0AA576C3945A}"
+          DTS:From="Package\Create Tables\dimBalls"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Create Tables\dimStrikes" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{1ec16371-41d8-48db-8d52-3b117f0627b6}"
+          DTS:From="Package\Create Tables\dimHitterHand"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Create Tables\dimPitcherHand" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{ae79c6fe-a142-4a51-a11c-f2aa08d87ddf}"
+          DTS:From="Package\Create Tables\dimInning"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Create Tables\dimOuts" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{8d695d27-ba54-4997-ba73-7341d54f0049}"
+          DTS:From="Package\Create Tables\dimPitcherHand"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Create Tables\dimLeadoff" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{916e0c59-e370-424c-aa35-3d4165576555}"
+          DTS:From="Package\Create Tables\dimLeadoff"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Create Tables\dimPinchHit" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{3f7c812d-5aae-4168-a38c-6dfbac62a5a1}"
+          DTS:From="Package\Create Tables\dimPinchHit"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Create Tables\dimBatterPosition" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{8920b475-4442-4af3-9d5f-72f97605d01b}"
+          DTS:From="Package\Create Tables\dimBatterPosition"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Create Tables\dimBatterLineup" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create Tables.PrecedenceConstraints[Constraint 9]"
+          DTS:CreationName=""
+          DTS:DTSID="{e224c888-12bf-4c1c-966d-d3624e00cd70}"
+          DTS:From="Package\Create Tables\dimBatterLineup"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 9"
+          DTS:To="Package\Create Tables\dimEventType" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{8B3E5099-6F37-434A-A9E9-BF1970F1AE45}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimBalls"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{f6cfe1cc-55c1-4e67-9e96-f4e651e34f42}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBalls"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimBalls (Balls)&#xA;SELECT DISTINCT balls_ct&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimBases"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{fdd0fcae-26bc-463f-bf5a-d5022595b427}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBases"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="Insert into retrosheet.dbo.dimBases(BasesID, BasesCD, Description) values (0, '___', 'Empty')&#xA;Insert into retrosheet.dbo.dimBases(BasesID, BasesCD, Description) values (1, '1__', 'First')&#xA;Insert into retrosheet.dbo.dimBases(BasesID, BasesCD, Description) values (2, '_2_', 'Second')&#xA;Insert into retrosheet.dbo.dimBases(BasesID, BasesCD, Description) values (3, '12_', 'First and Second')&#xA;Insert into retrosheet.dbo.dimBases(BasesID, BasesCD, Description) values (4, '__3', 'Third')&#xA;Insert into retrosheet.dbo.dimBases(BasesID, BasesCD, Description) values (5, '1_3', 'First and Third')&#xA;Insert into retrosheet.dbo.dimBases(BasesID, BasesCD, Description) values (6, '_23', 'Second and Third')&#xA;Insert into retrosheet.dbo.dimBases(BasesID, BasesCD, Description) values (7, '123', 'Loaded')"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimBattedBallType"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{4913943f-14b8-4f83-8491-fa6c17789ce8}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBattedBallType"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimBattedBallType (BattedBallType)&#xA;SELECT DISTINCT battedball_cd&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimBatterLineup"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{6d61c94c-63b5-4ba6-92ac-fc7968d815b1}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBatterLineup"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimBatterLineup (BatterLineup)&#xA;SELECT DISTINCT bat_lineup_id&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimBatterPosition"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{b49ab7a4-f0ae-4143-8f68-0d0e69a5c27b}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBatterPosition"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimBatterPosition (BatterPosition)&#xA;SELECT DISTINCT bat_fld_cd&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimBunt"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{c52b82fc-4945-4d50-ac9f-59dff335e08d}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimBunt"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimBunt (Bunt)&#xA;SELECT DISTINCT bunt_fl&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimFoul"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{51c8cc77-354a-456e-a394-4f9cf8feb554}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimFoul"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimFoul (Foul)&#xA;SELECT DISTINCT foul_fl&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimGame"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{6ae95e03-a3a1-45e0-baf4-6eed7b9e18a6}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimGame"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimGame (GameID, Year, Month, Day, GameNumber)&#xA;select distinct game_id,&#xA;SUBSTRING(game_id, 4, 4) &quot;Year&quot;, &#xA;substring(game_id, 8, 2) &quot;Month&quot;,&#xA;substring(game_id, 10, 2) &quot;Day&quot;,&#xA;substring(game_id, 12, 1) &quot;GameNumber&quot;&#xA;from tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimHitterHand"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{68a83584-8081-4429-9164-5d78f15837b6}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimHitterHand"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimBatterHand (BatterHand)&#xA;SELECT DISTINCT BAT_HAND_CD&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimHome"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{883f5dce-e2fb-4a3e-b436-12db8e840cf6}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimHome"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimHome (Home) values ('0')&#xA;INSERT INTO retrosheet.dbo.dimHome (Home) values ('1')"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimInning"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{551f83ce-6271-427d-a8bd-990561d5ec57}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimInning"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimInning (Inning)&#xA;SELECT DISTINCT inn_ct&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimLeadoff"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{a040bc15-e861-427f-836d-443c98316709}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimLeadoff"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimLeadoff (leadoff)&#xA;SELECT DISTINCT leadoff_fl&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimOuts"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{70e88569-7200-4010-b2a2-b27c72ce94c3}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimOuts"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimOuts (Outs)&#xA;SELECT DISTINCT outs_ct&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimPinchHit"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{b8183eee-f7ec-4b2e-9744-86f3954c6021}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimPinchHit"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimPinchHit (PinchHit)&#xA;SELECT DISTINCT ph_fl&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimPitcherHand"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{006075a7-c5a6-4c6f-a51d-7172194f481c}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimPitcherHand"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimPitcherHand (PitcherHand)&#xA;SELECT DISTINCT PIT_HAND_CD&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimStrikes"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{3811f14b-63a1-4f5b-b5f2-63ebd34817f3}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimStrikes"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimStrikes (Strikes)&#xA;SELECT DISTINCT strikes_ct&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\dimTeam"
+          DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:Description="Execute T-SQL Statement Task"
+          DTS:DTSID="{4b67d750-f964-4a9a-913b-6eaa9b6b64f6}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="dimTeam"
+          DTS:TaskContact="Execute T-SQL Statement Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C85948A0-4390-472A-8A10-F0AA451EAAEA}"
+              SQLTask:SqlStatementSource="use retrosheet;&#xA;&#xA;INSERT INTO retrosheet.dbo.dimTeam (Team)&#xA;SELECT DISTINCT substring(game_id, 1, 3)&#xA;FROM            tblFlatFile"
+              SQLTask:ServerVersion="9"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Populate dimEventType"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{d1884369-e2b1-4255-bd23-15123f7a1e51}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Populate dimEventType"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Populate dimEventType\Flat File Source"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="Flat File Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Event Types]"
+                      connectionManagerRefId="Package.ConnectionManagers[Event Types]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].Columns[Code]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Code]"
+                          lineageId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].Columns[Code]"
+                          name="Code"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].Columns[Primary event]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Primary event]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].Columns[Primary event]"
+                          name="Primary event"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Code]"
+                          dataType="i4"
+                          name="Code" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Primary event]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="Primary event" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Populate dimEventType\SQL Server Destination"
+                  componentClassID="Microsoft.SQLServerDestination"
+                  contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+                  description="SQL Server Destination"
+                  name="SQL Server Destination"
+                  version="5">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.String"
+                      description="The name of the database object to copy data into."
+                      expressionType="Notify"
+                      name="BulkInsertTableName">[dbo].[dimEventType]</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                      name="BulkInsertCheckConstraints">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                      expressionType="Notify"
+                      name="BulkInsertFirstRow">-1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                      name="BulkInsertFireTriggers">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                      name="BulkInsertKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="BulkInsertKeepNulls">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                      expressionType="Notify"
+                      name="BulkInsertLastRow">-1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                      name="BulkInsertMaxErrors">-1</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                      expressionType="Notify"
+                      name="BulkInsertOrder"></property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                      name="BulkInsertTablock">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                      expressionType="Notify"
+                      name="Timeout">30</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                      name="MaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{3F21B28E-310A-4B46-819B-3C4892421D52}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[thor_groot.Retrosheet]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                      hasSideEffects="true"
+                      name="SQL Server Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Code]"
+                          cachedDataType="i4"
+                          cachedName="Code"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EventCD]"
+                          lineageId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].Columns[Code]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Primary event]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="Primary event"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EventName]"
+                          lineageId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output].Columns[Primary event]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EventCD]"
+                          dataType="i4"
+                          name="EventCD" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EventName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="EventName" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Populate dimEventType.Paths[Flat File Source Output]"
+                  endId="Package\Sequence Container\Populate dimEventType\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Sequence Container\Populate dimEventType\Flat File Source.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Populate dimPlayer"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{e7a93ff6-4ec9-458b-b865-08d0da0a7bb9}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Populate dimPlayer"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Populate dimPlayer\dimPlayer"
+                  componentClassID="Microsoft.SQLServerDestination"
+                  contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+                  description="SQL Server Destination"
+                  name="dimPlayer"
+                  version="5">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.String"
+                      description="The name of the database object to copy data into."
+                      expressionType="Notify"
+                      name="BulkInsertTableName">[dbo].[dimPlayer]</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                      name="BulkInsertCheckConstraints">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                      expressionType="Notify"
+                      name="BulkInsertFirstRow">-1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                      name="BulkInsertFireTriggers">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                      name="BulkInsertKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="BulkInsertKeepNulls">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                      expressionType="Notify"
+                      name="BulkInsertLastRow">-1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                      name="BulkInsertMaxErrors">-1</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                      expressionType="Notify"
+                      name="BulkInsertOrder"></property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                      name="BulkInsertTablock">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                      expressionType="Notify"
+                      name="Timeout">30</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                      name="MaxInsertCommitSize">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Connections[OleDbConnection]"
+                      connectionManagerID="{3F21B28E-310A-4B46-819B-3C4892421D52}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[thor_groot.Retrosheet]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input]"
+                      hasSideEffects="true"
+                      name="SQL Server Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].Columns[Last]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="17"
+                          cachedName="Last"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].ExternalColumns[Last]"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[Last]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].Columns[First]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="First"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].ExternalColumns[First]"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[First]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].Columns[PlayerID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="PlayerID"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].ExternalColumns[PlayerID]"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[PlayerID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].Columns[Debut]"
+                          cachedDataType="dbDate"
+                          cachedName="Debut"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].ExternalColumns[Debut]"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[Debut]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].ExternalColumns[PlayerID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="PlayerID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].ExternalColumns[First]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="First" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].ExternalColumns[Last]"
+                          codePage="1252"
+                          dataType="str"
+                          length="17"
+                          name="Last" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input].ExternalColumns[Debut]"
+                          dataType="dbDate"
+                          name="Debut" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Populate dimPlayer\Flat File Source"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="Flat File Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Players]"
+                      connectionManagerRefId="Package.ConnectionManagers[Players]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[Last]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[LAST]"
+                          length="17"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[Last]"
+                          name="Last"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[First]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FIRST]"
+                          length="15"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[First]"
+                          name="First"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[PlayerID]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ID]"
+                          length="10"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[PlayerID]"
+                          name="PlayerID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[Debut]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DEBUT]"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].Columns[Debut]"
+                          name="Debut"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[LAST]"
+                          codePage="1252"
+                          dataType="str"
+                          length="17"
+                          name="LAST" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FIRST]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="FIRST" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="ID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DEBUT]"
+                          dataType="dbDate"
+                          name="DEBUT" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Populate dimPlayer.Paths[Flat File Source Output]"
+                  endId="Package\Sequence Container\Populate dimPlayer\dimPlayer.Inputs[SQL Server Destination Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Sequence Container\Populate dimPlayer\Flat File Source.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{e15f5720-775e-4dc8-8273-d5c0a37dbced}"
+          DTS:From="Package\Sequence Container\dimStrikes"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\dimHitterHand" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{05f6626a-79b9-4cd6-be14-a27d38fc5cca}"
+          DTS:From="Package\Sequence Container\dimOuts"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\dimBalls" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 10]"
+          DTS:CreationName=""
+          DTS:DTSID="{B04DC591-05F3-4AEF-82C7-3A6D0D4F5FBE}"
+          DTS:From="Package\Sequence Container\dimFoul"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 10"
+          DTS:To="Package\Sequence Container\Populate dimPlayer" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 11]"
+          DTS:CreationName=""
+          DTS:DTSID="{14841550-303a-4641-8088-9498d3033c0b}"
+          DTS:From="Package\Sequence Container\Populate dimEventType"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 11"
+          DTS:To="Package\Sequence Container\dimBases" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 12]"
+          DTS:CreationName=""
+          DTS:DTSID="{bd4c6216-2603-478f-b239-0a1c8ddffc95}"
+          DTS:From="Package\Sequence Container\dimBases"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 12"
+          DTS:To="Package\Sequence Container\dimBattedBallType" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 13]"
+          DTS:CreationName=""
+          DTS:DTSID="{c3c8b72a-c90a-434d-b9a3-d23661ed335e}"
+          DTS:From="Package\Sequence Container\dimBattedBallType"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 13"
+          DTS:To="Package\Sequence Container\dimBunt" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 14]"
+          DTS:CreationName=""
+          DTS:DTSID="{e2582731-03f2-4985-be88-2792ccbb1b2b}"
+          DTS:From="Package\Sequence Container\dimBunt"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 14"
+          DTS:To="Package\Sequence Container\dimFoul" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 15]"
+          DTS:CreationName=""
+          DTS:DTSID="{534562BF-C45C-4C86-A719-F0438C0FE5C3}"
+          DTS:From="Package\Sequence Container\dimGame"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 15"
+          DTS:To="Package\Sequence Container\dimHome" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 17]"
+          DTS:CreationName=""
+          DTS:DTSID="{e1a35192-08b1-4d20-aa18-6a31fd4c0658}"
+          DTS:From="Package\Sequence Container\Populate dimPlayer"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 17"
+          DTS:To="Package\Sequence Container\dimTeam" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 18]"
+          DTS:CreationName=""
+          DTS:DTSID="{9a9a5ac1-1fc1-4c69-91e9-8118a51b9bdb}"
+          DTS:From="Package\Sequence Container\dimTeam"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 18"
+          DTS:To="Package\Sequence Container\dimGame" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{3173be02-b906-4444-95fa-2594f02fcd8a}"
+          DTS:From="Package\Sequence Container\dimBalls"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\dimStrikes" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{8c533e48-fa6b-48f7-80e4-33fd199ca5f3}"
+          DTS:From="Package\Sequence Container\dimHitterHand"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sequence Container\dimPitcherHand" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{ffd9d3d8-32f8-4328-ad67-d5616b37b71c}"
+          DTS:From="Package\Sequence Container\dimInning"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Sequence Container\dimOuts" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{c9b78006-4cd5-445c-8569-37650b8a3d30}"
+          DTS:From="Package\Sequence Container\dimPitcherHand"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Sequence Container\dimLeadoff" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{ce93cb65-030f-4c8c-9aa2-5cacb4020d4c}"
+          DTS:From="Package\Sequence Container\dimLeadoff"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Sequence Container\dimPinchHit" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{bb9efc0a-898f-4532-8d8b-ebe7b5990076}"
+          DTS:From="Package\Sequence Container\dimPinchHit"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Sequence Container\dimBatterPosition" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{46f219b6-fe1a-4596-b7ff-ac8123e3850c}"
+          DTS:From="Package\Sequence Container\dimBatterPosition"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Sequence Container\dimBatterLineup" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 9]"
+          DTS:CreationName=""
+          DTS:DTSID="{B9C1C385-BC43-4765-873A-D75C4C3064D1}"
+          DTS:From="Package\Sequence Container\dimBatterLineup"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 9"
+          DTS:To="Package\Sequence Container\Populate dimEventType" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{CFC9E328-4525-4D4D-B5BA-E06660FD4728}"
+      DTS:From="Package\Create Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Sequence Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="128" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Create Tables\dimPitcherHand"
+          TopLeft="199,88" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Create Tables\dimHitterHand"
+          TopLeft="22,84" />
+        <NodeLayout
+          Size="118,42"
+          Id="Package\Create Tables\dimOuts"
+          TopLeft="203,13" />
+        <NodeLayout
+          Size="118,42"
+          Id="Package\Create Tables\dimBalls"
+          TopLeft="360,14" />
+        <NodeLayout
+          Size="128,42"
+          Id="Package\Create Tables\dimStrikes"
+          TopLeft="520,16" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Create Tables\dimInning"
+          TopLeft="31,11" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Create Tables\dimLeadoff"
+          TopLeft="376,87" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Create Tables\dimPinchHit"
+          TopLeft="537,88" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Create Tables\dimBatterPosition"
+          TopLeft="30,165" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Create Tables\dimBatterLineup"
+          TopLeft="235,164" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Create Tables\dimEventType"
+          TopLeft="423,164" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Create Tables\dimBases"
+          TopLeft="26,238" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Create Tables\dimBattedBallType"
+          TopLeft="220,243" />
+        <NodeLayout
+          Size="118,42"
+          Id="Package\Create Tables\dimBunt"
+          TopLeft="437,241" />
+        <NodeLayout
+          Size="116,42"
+          Id="Package\Create Tables\dimFoul"
+          TopLeft="30,316" />
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Create Tables\dimPlayer"
+          TopLeft="222,315" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Create Tables\dimTeam"
+          TopLeft="384,317" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Create Tables\dimGame"
+          TopLeft="538,316" />
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 1]"
+          TopLeft="321,34.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="39,0"
+              Start="0,0"
+              End="31.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="31.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint]"
+          TopLeft="584,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-488.5,26"
+              Start="0,0"
+              End="-488.5,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9"
+                    Point2="0,13"
+                    Point3="-4,13" />
+                  <mssgle:LineSegment
+                    End="-484.5,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-484.5,13"
+                    Point2="-488.5,13"
+                    Point3="-488.5,17" />
+                  <mssgle:LineSegment
+                    End="-488.5,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 3]"
+          TopLeft="169,107">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30,0"
+              Start="0,0"
+              End="22.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="22.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 4]"
+          TopLeft="157,33">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46,0"
+              Start="0,0"
+              End="38.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="38.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 5]"
+          TopLeft="352,108.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="24,0"
+              Start="0,0"
+              End="16.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="16.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 6]"
+          TopLeft="507,108.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30,0"
+              Start="0,0"
+              End="22.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="22.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 7]"
+          TopLeft="604.5,130">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-494,35"
+              Start="0,0"
+              End="-494,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="-4,17.5" />
+                  <mssgle:LineSegment
+                    End="-490,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-490,17.5"
+                    Point2="-494,17.5"
+                    Point3="-494,21.5" />
+                  <mssgle:LineSegment
+                    End="-494,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 8]"
+          TopLeft="191,185.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="44,0"
+              Start="0,0"
+              End="36.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="36.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 9]"
+          TopLeft="391,185">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="32,0"
+              Start="0,0"
+              End="24.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="24.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 12]"
+          TopLeft="149,261.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="71,0"
+              Start="0,0"
+              End="63.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="63.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 13]"
+          TopLeft="387,263">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50,0"
+              Start="0,0"
+              End="42.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="42.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 14]"
+          TopLeft="496,283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-408,33"
+              Start="0,0"
+              End="-408,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.5"
+                    Point2="0,16.5"
+                    Point3="-4,16.5" />
+                  <mssgle:LineSegment
+                    End="-404,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-404,16.5"
+                    Point2="-408,16.5"
+                    Point3="-408,20.5" />
+                  <mssgle:LineSegment
+                    End="-408,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 15]"
+          TopLeft="146,336.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="76,0"
+              Start="0,0"
+              End="68.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="68.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 18]"
+          TopLeft="507,337.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="31,0"
+              Start="0,0"
+              End="23.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="23.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 2]"
+          TopLeft="478,36">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="42,0"
+              Start="0,0"
+              End="34.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="34.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 10]"
+          TopLeft="496,206">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-408.5,32"
+              Start="0,0"
+              End="-408.5,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12"
+                    Point2="0,16"
+                    Point3="-4,16" />
+                  <mssgle:LineSegment
+                    End="-404.5,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-404.5,16"
+                    Point2="-408.5,16"
+                    Point3="-408.5,20" />
+                  <mssgle:LineSegment
+                    End="-408.5,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 11]"
+          TopLeft="347,337">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37,0"
+              Start="0,0"
+              End="29.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Create Tables\dimHome"
+          TopLeft="32,394" />
+        <EdgeLayout
+          Id="Package\Create Tables.PrecedenceConstraints[Constraint 16]"
+          TopLeft="600,358">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-506,36"
+              Start="0,0"
+              End="-506,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14"
+                    Point2="0,18"
+                    Point3="-4,18" />
+                  <mssgle:LineSegment
+                    End="-502,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-502,18"
+                    Point2="-506,18"
+                    Point3="-506,22" />
+                  <mssgle:LineSegment
+                    End="-506,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="747,491"
+          Size="747,534"
+          Id="Package\Create Tables"
+          TopLeft="61.6666666666666,38.6666666666667" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Sequence Container\dimPitcherHand"
+          TopLeft="228.5,101.5" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Sequence Container\dimHitterHand"
+          TopLeft="38.5,100.25" />
+        <NodeLayout
+          Size="118,42"
+          Id="Package\Sequence Container\dimOuts"
+          TopLeft="235,15.75" />
+        <NodeLayout
+          Size="118,42"
+          Id="Package\Sequence Container\dimBalls"
+          TopLeft="409.5,15" />
+        <NodeLayout
+          Size="128,42"
+          Id="Package\Sequence Container\dimStrikes"
+          TopLeft="596.75,13.75" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Sequence Container\dimInning"
+          TopLeft="34,16.25" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Sequence Container\dimLeadoff"
+          TopLeft="432.75,100.5" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Sequence Container\dimPinchHit"
+          TopLeft="622,101.75" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Sequence Container\dimBatterPosition"
+          TopLeft="36.75,186.75" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Sequence Container\dimBatterLineup"
+          TopLeft="233.5,185.75" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Sequence Container\Populate dimEventType"
+          TopLeft="435.25,185.25" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Sequence Container\dimBases"
+          TopLeft="665.5,186" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Sequence Container\dimBattedBallType"
+          TopLeft="38.5,270.5" />
+        <NodeLayout
+          Size="118,42"
+          Id="Package\Sequence Container\dimBunt"
+          TopLeft="269.5,272.5" />
+        <NodeLayout
+          Size="116,42"
+          Id="Package\Sequence Container\dimFoul"
+          TopLeft="454.5,272" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Sequence Container\Populate dimPlayer"
+          TopLeft="623,273.25" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Sequence Container\dimTeam"
+          TopLeft="42.5,357" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Sequence Container\dimGame"
+          TopLeft="240,355.25" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="353,36.375">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56.5,0"
+              Start="0,0"
+              End="49,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="49,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="527.5,35.375">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.25,0"
+              Start="0,0"
+              End="61.75,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="61.75,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="660.75,55.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-548.75,44.5"
+              Start="0,0"
+              End="-548.75,37">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.25"
+                    Point2="0,22.25"
+                    Point3="-4,22.25" />
+                  <mssgle:LineSegment
+                    End="-544.75,22.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-544.75,22.25"
+                    Point2="-548.75,22.25"
+                    Point3="-548.75,26.25" />
+                  <mssgle:LineSegment
+                    End="-548.75,37" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="185.5,121.875">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43,0"
+              Start="0,0"
+              End="35.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="35.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="160,37">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="75,0"
+              Start="0,0"
+              End="67.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="67.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 5]"
+          TopLeft="381.5,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="51.25,0"
+              Start="0,0"
+              End="43.75,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="43.75,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 6]"
+          TopLeft="563.75,122.125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="58.25,0"
+              Start="0,0"
+              End="50.75,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="50.75,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 7]"
+          TopLeft="689.5,143.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-572.25,43"
+              Start="0,0"
+              End="-572.25,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5"
+                    Point2="0,21.5"
+                    Point3="-4,21.5" />
+                  <mssgle:LineSegment
+                    End="-568.25,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-568.25,21.5"
+                    Point2="-572.25,21.5"
+                    Point3="-572.25,25.5" />
+                  <mssgle:LineSegment
+                    End="-572.25,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 8]"
+          TopLeft="197.75,207.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="35.75,0"
+              Start="0,0"
+              End="28.25,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="28.25,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 11]"
+          TopLeft="625.25,206.625">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.25,0"
+              Start="0,0"
+              End="32.75,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="32.75,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 12]"
+          TopLeft="727,228">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-605,42.5"
+              Start="0,0"
+              End="-605,35">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.25"
+                    Point2="0,21.25"
+                    Point3="-4,21.25" />
+                  <mssgle:LineSegment
+                    End="-601,21.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-601,21.25"
+                    Point2="-605,21.25"
+                    Point3="-605,25.25" />
+                  <mssgle:LineSegment
+                    End="-605,35" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 13]"
+          TopLeft="205.5,292.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64,0"
+              Start="0,0"
+              End="56.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="56.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 14]"
+          TopLeft="387.5,293.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="67,0"
+              Start="0,0"
+              End="59.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="59.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 17]"
+          TopLeft="707.5,315.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-603.5,41.75"
+              Start="0,0"
+              End="-603.5,34.25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.875"
+                    Point2="0,20.875"
+                    Point3="-4,20.875" />
+                  <mssgle:LineSegment
+                    End="-599.5,20.875" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-599.5,20.875"
+                    Point2="-603.5,20.875"
+                    Point3="-603.5,24.875" />
+                  <mssgle:LineSegment
+                    End="-603.5,34.25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 18]"
+          TopLeft="165.5,377.125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="74.5,0"
+              Start="0,0"
+              End="67,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="67,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 9]"
+          TopLeft="389.5,206.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.75,0"
+              Start="0,0"
+              End="38.25,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="38.25,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 10]"
+          TopLeft="570.5,293.625">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="52.5,0"
+              Start="0,0"
+              End="45,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="45,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Sequence Container\dimHome"
+          TopLeft="427,352" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 15]"
+          TopLeft="364,374.625">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="63,0"
+              Start="0,0"
+              End="55.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="55.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="824,480"
+          Size="824,523"
+          Id="Package\Sequence Container"
+          TopLeft="899.25,40.75" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="808.666666666667,303.958333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="90.5833333333334,0"
+              Start="0,0"
+              End="83.0833333333334,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="83.0833333333334,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Populate dimEventType">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Sequence Container\Populate dimEventType\SQL Server Destination"
+          TopLeft="71,182" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Sequence Container\Populate dimEventType\Flat File Source"
+          TopLeft="77,78" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Populate dimEventType.Paths[Flat File Source Output]"
+          TopLeft="152.5,120">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.5,62"
+              Start="0,0"
+              End="12.5,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="4,31" />
+                  <mssgle:LineSegment
+                    End="8.5,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.5,31"
+                    Point2="12.5,31"
+                    Point3="12.5,35" />
+                  <mssgle:LineSegment
+                    End="12.5,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Populate dimEventType\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Populate dimPlayer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Sequence Container\Populate dimPlayer\dimPlayer"
+          TopLeft="111,169" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Sequence Container\Populate dimPlayer\Flat File Source"
+          TopLeft="124,66" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Populate dimPlayer.Paths[Flat File Source Output]"
+          TopLeft="199.5,108">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-26,61"
+              Start="0,0"
+              End="-26,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.5"
+                    Point2="0,30.5"
+                    Point3="-4,30.5" />
+                  <mssgle:LineSegment
+                    End="-22,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22,30.5"
+                    Point2="-26,30.5"
+                    Point3="-26,34.5" />
+                  <mssgle:LineSegment
+                    End="-26,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Populate dimPlayer\dimPlayer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
